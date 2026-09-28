@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int heap[20], n = 0;
+
+void insert(int value)
+{
+    int i, parent, temp;
+
+    heap[n] = value;
+    i = n;
+    n++;
+
+    while (i > 0)
+    {
+        parent = (i - 1) / 2;
+
+        if (heap[parent] >= heap[i])
+            break;
+
+        temp = heap[parent];
+        heap[parent] = heap[i];
+        heap[i] = temp;
+
+        i = parent;
+    }
+}
+
+void display()
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+        printf("%d ", heap[i]);
+
+    printf("\n");
+}
+
+int main()
+{
+    int a[] = {45, 72, 30, 90, 65, 50, 85};
+    int i;
+
+    for (i = 0; i < 7; i++)
+    {
+        insert(a[i]);
+        printf("After inserting %d: ", a[i]);
+        display();
+    }
+
+    return 0;
+}
